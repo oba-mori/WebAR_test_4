@@ -14,64 +14,64 @@ https://chat.openai.com/c/4086099e-a2d7-44a7-9215-47eedcc1615e
 
 
 
-
  <!DOCTYPE html>
  <html lang="en">
- <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Three.js Test</title>
-   <style>
-     body {
-       margin: 0;
-       overflow: hidden;
-     }
-   </style>
- </head>
- <body>
-   <h1>Three.js Test</h1>
- 
-   <script type="module">
-     import * as THREE from 'https://cdn.skypack.dev/three@0.135.0';
-     
- 
-     /* SCENE, CAMERA */
-     const scene = new THREE.Scene();
-     const camera = new THREE.PerspectiveCamera(
-       75,
-       window.innerWidth / window.innerHeight,
-       0.1,
-       1000
-     );
- 
-     /* RENDERER */
-     const renderer = new THREE.WebGLRenderer();
-     renderer.setSize(window.innerWidth, window.innerHeight);
-     document.body.appendChild(renderer.domElement);
- 
-     /* 立方体生成 */
-     const geometry = new THREE.BoxGeometry(1, 1, 1);
-     const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-     const cube = new THREE.Mesh(geometry, material);
-     scene.add(cube);
- 
-     camera.position.z = 5;
- 
-     /* フレームごとに実行されるアニメーション */
-     function animate() {
-       requestAnimationFrame(animate);
- 
-       cube.rotation.x += 0.01;
-       cube.rotation.y += 0.01;
- 
-       renderer.render(scene, camera);
-     }
- 
-     animate();
-   </script>
- </body>
+   <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Three.js AR Experience</title>
+     <style>
+       body { margin: 0; overflow: hidden; }
+     </style>
+   </head>
+   
+   <body>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+     <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/jsm/webxr/ARButton.js"></script>
+     <script>
+       // Three.jsの基本的な初期化コード
+       const scene = new THREE.Scene();
+       const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+       const renderer = new THREE.WebGLRenderer({ antialias: true });
+       renderer.setSize(window.innerWidth, window.innerHeight);
+       document.body.appendChild(renderer.domElement);
+       
+       // 環境光を追加
+       const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+       scene.add(ambientLight);
+       
+       // 平行光源を追加
+       const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+       directionalLight.position.set(1, 1, 1);
+       scene.add(directionalLight);
+       
+       // 3Dオブジェクトの生成
+       const geometry = new THREE.BoxGeometry(1, 1, 1);
+       const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
+       const cube = new THREE.Mesh(geometry, material);
+       scene.add(cube);
+       
+       // カメラの位置を設定
+       camera.position.z = 5;
+       
+       // レンダリングループの設定
+       function animate() {
+         requestAnimationFrame(animate);
+       
+         cube.rotation.x += 0.01;
+         cube.rotation.y += 0.01;
+       
+         renderer.render(scene, camera);
+       }
+       animate();
+       
+       // ARButtonを追加するコード
+       document.body.appendChild(ARButton.createButton(renderer, { requiredFeatures: ['hit-test'] }));
+     </script>
+   </body>
  </html>
  
 
- 
+
+
 

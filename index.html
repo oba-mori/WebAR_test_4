@@ -23,9 +23,16 @@ https://chat.openai.com/c/4086099e-a2d7-44a7-9215-47eedcc1615e
      </style>
    </head>
    <body>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-     <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/jsm/webxr/ARButton.js"></script>
-     <script>
+     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script> -->
+     <!-- <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/jsm/webxr/ARButton.js"></script> -->
+
+     <script type="module">
+      import * as THREE from 'https://cdn.skypack.dev/three@0.135.0/build/three.module.js';
+
+
+      import { ARButton } from 'https://cdn.skypack.dev/three@0.135.0/examples/jsm/webxr/ARButton.js';
+      // ARButtonを使用したコードを記述する
+
        const renderer = new THREE.WebGLRenderer({ antialias: true });
        renderer.setSize(window.innerWidth, window.innerHeight);
        document.body.appendChild(renderer.domElement);
